@@ -55,6 +55,17 @@ namespace RestApp.Controllers
             return BadRequest("Erro: invalid input");
         }
 
+        [HttpGet("media/{firstNumber}/{secondNumber}")]
+        public IActionResult MediaNumbers(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var resultado = (ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber)) / 2;
+                return Ok(resultado.ToString());
+            }
+            return BadRequest("Erro: invalid input");
+        }
+
         [HttpGet("sqr/{firstNumber}")]
         public IActionResult SqrNumbers(string firstNumber)
         {
