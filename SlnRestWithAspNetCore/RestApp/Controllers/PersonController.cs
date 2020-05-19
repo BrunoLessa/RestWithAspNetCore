@@ -1,45 +1,67 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RestApp.Business.Implementations;
+using RestApp.Model;
 
 namespace RestApp.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/[controller]/v{version:apiVersion}")]    
     [ApiController]
     public class PersonController : ControllerBase
     {
+        private IPersonBusiness _personBusiness;
+        public PersonController(IPersonBusiness personBusiness)
+        {
+            _personBusiness = personBusiness;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_personBusiness.FindAll());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public ActionResult Get(long id)
         {
-            return "value";
+            var person = _personBusiness.FindById(id);
+            if (person == null) 
+                return NotFound();
+            return Ok(person);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Person person)
         {
+            if (person == null)
+                return BadRequest();
+            return new ObjectResult(_personBusiness.Create(person));
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put([FromBody] Person person)
         {
+            if (person == null)
+                return BadRequest();
+            var retorno = _personBusiness.Update(person);
+            if (retorno == null)
+                return BadRequest();
+            return new ObjectResult(_personBusiness.Update(person));
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var result = _personBusiness.FindById(id);
+            if (result == null) return BadRequest();
+
+            _personBusiness.Delete(id);
+            
+            return NoContent();
         }
     }
 }

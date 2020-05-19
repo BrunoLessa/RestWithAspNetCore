@@ -1,5 +1,6 @@
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\appsettings.Development.json
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\appsettings.json
+E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\Evolve.json
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\RestApp.deps.json
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\RestApp.runtimeconfig.json
