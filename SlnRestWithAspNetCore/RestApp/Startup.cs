@@ -1,16 +1,24 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using RestApp.Business.Implementations;
+using RestApp.Data.Converter;
+using RestApp.Data.Converters;
+using RestApp.Data.VO;
+using RestApp.HyperMedia;
+using RestApp.Model;
 using RestApp.Model.Context;
 using RestApp.Repository.Generic;
 using RestApp.Repository.Implementations;
 using System;
 using System.Collections.Generic;
+using Tapioca.HATEOAS;
 
 namespace RestApp
 {
@@ -52,13 +60,34 @@ namespace RestApp
                 }
 
             }
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+            }).AddXmlSerializerFormatters();
+
             services.AddApiVersioning();
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
+            services.AddSingleton(filterOptions);
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(
+                    "v1.0",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "Restful with ASP.NET core 2.0",
+                        Version = "v1.0"
+                    }
+                    );
+            });
 
             //Dependency Injection
             services.AddScoped<IPersonBusiness, PersonBusiness>();
             services.AddScoped<IBookBusiness, BookBusiness>();
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped < IParser < BookVO, Book>,BookConverter>();
+            services.AddScoped<IParser<Book, BookVO>, BookConverter>();
             services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
         }
@@ -75,9 +104,23 @@ namespace RestApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            //Inicio config swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Minha API v1.0");
+            });
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
+            //Final config swagger
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes=> 
+            {
+                routes.MapRoute(
+                    name: "DefaultApi",
+                    template: "{controller=Values}/{id?}");
+            });
         }
     }
 }

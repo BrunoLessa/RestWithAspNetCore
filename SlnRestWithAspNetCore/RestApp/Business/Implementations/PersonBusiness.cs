@@ -1,42 +1,48 @@
-﻿using RestApp.Model;
-using RestApp.Repository.Implementations;
-using System;
+﻿using RestApp.Data.Converters;
+using RestApp.Data.VO;
+using RestApp.Model;
+using RestApp.Repository.Generic;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RestApp.Business.Implementations
 {
     public class PersonBusiness : IPersonBusiness
     {
-        private readonly IPersonRepository _personrepository;
-        public PersonBusiness(IPersonRepository personrepository)
+        private IGenericRepository<Person> _repository;
+        private readonly PersonConverter _converter;
+        public PersonBusiness(IGenericRepository<Person> repository)
         {
-            _personrepository = personrepository;
+            _repository = repository;
+            _converter = new PersonConverter();
         }
-        public Person Create(Person person)
-        {
-            return _personrepository.Create(person);
+        public PersonVO Create(PersonVO person)
+        {            
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Create(personEntity);
+            return _converter.Parse(personEntity);
         }
 
         public void Delete(long id)
         {
-            _personrepository.Delete(id);
+            _repository.Delete(id);
         }
 
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
-            return _personrepository.FindAll();
+            var retorno = _repository.FindAll();
+            return _converter.ParseList(retorno);
         }
 
-        public Person FindById(long id)
+        public PersonVO FindById(long id)
         {
-            return _personrepository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
         }
 
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return _personrepository.Update(person);
+            var personEntity = _converter.Parse(person);
+            personEntity = _repository.Update(personEntity);
+            return _converter.Parse(personEntity);
         }
     }
 }

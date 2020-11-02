@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestApp.Business.Implementations;
-using RestApp.Model;
+using RestApp.Data.VO;
+using Tapioca.HATEOAS;
 
 namespace RestApp.Controllers
 {
@@ -9,13 +10,14 @@ namespace RestApp.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private IPersonBusiness _personBusiness;
+        private readonly IPersonBusiness _personBusiness;
         public PersonController(IPersonBusiness personBusiness)
         {
             _personBusiness = personBusiness;
         }
         // GET api/values
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public ActionResult Get()
         {
             return Ok(_personBusiness.FindAll());
@@ -23,6 +25,7 @@ namespace RestApp.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public ActionResult Get(long id)
         {
             var person = _personBusiness.FindById(id);
@@ -33,7 +36,8 @@ namespace RestApp.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null)
                 return BadRequest();
@@ -42,7 +46,8 @@ namespace RestApp.Controllers
 
         // PUT api/values/5
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null)
                 return BadRequest();
@@ -54,6 +59,7 @@ namespace RestApp.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {
             var result = _personBusiness.FindById(id);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestApp.Business.Implementations;
+using RestApp.Data.VO;
 using RestApp.Model;
 
 namespace RestApp.Controllers
@@ -33,7 +34,7 @@ namespace RestApp.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] Book book)
+        public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null)
                 return BadRequest();
@@ -42,7 +43,7 @@ namespace RestApp.Controllers
 
         // PUT api/values/5
         [HttpPut]
-        public IActionResult Put([FromBody] Book book)
+        public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null)
                 return BadRequest();

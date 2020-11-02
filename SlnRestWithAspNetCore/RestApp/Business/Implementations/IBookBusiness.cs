@@ -1,14 +1,14 @@
-﻿using RestApp.Model;
+﻿using RestApp.Data.VO;
 using System.Collections.Generic;
 
 namespace RestApp.Business.Implementations
 {
     public interface IBookBusiness
     {
-        Book Create(Book objeto);
-        Book FindById(long id);
-        List<Book> FindAll();
-        Book Update(Book objeto);
+        BookVO Create(BookVO objeto);
+        BookVO FindById(long id);
+        List<BookVO> FindAll();
+        BookVO Update(BookVO objeto);
         void Delete(long id);
     }
 }

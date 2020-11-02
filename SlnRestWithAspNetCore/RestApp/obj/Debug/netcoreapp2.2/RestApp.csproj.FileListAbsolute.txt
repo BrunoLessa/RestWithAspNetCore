@@ -7,11 +7,12 @@ E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnR
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\RestApp.runtimeconfig.dev.json
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\RestApp.dll
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\bin\Debug\netcoreapp2.2\RestApp.pdb
-E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.RazorAssemblyInfo.cache
-E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.RazorAssemblyInfo.cs
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.AssemblyInfoInputs.cache
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.AssemblyInfo.cs
+E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.RazorAssemblyInfo.cache
+E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.RazorAssemblyInfo.cs
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.RazorTargetAssemblyInfo.cache
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.dll
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.pdb
+E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.genruntimeconfig.cache
 E:\Documents\Bruno\Projetos_Programas\RestWithAspNetCore\RestWithAspNetCore\SlnRestWithAspNetCore\RestApp\obj\Debug\netcoreapp2.2\RestApp.csprojAssemblyReference.cache

@@ -1,4 +1,7 @@
-﻿using RestApp.Model;
+﻿using RestApp.Data.Converter;
+using RestApp.Data.Converters;
+using RestApp.Data.VO;
+using RestApp.Model;
 using RestApp.Repository.Generic;
 using System.Collections.Generic;
 
@@ -7,14 +10,19 @@ namespace RestApp.Business.Implementations
     public class BookBusiness : IBookBusiness
     {
         private IGenericRepository<Book> _repository;
+        private readonly IParser<BookVO, Book> _converter;
+        private readonly IParser<Book, BookVO> _desconverter;
 
-        public BookBusiness(IGenericRepository<Book> repository)
+        public BookBusiness(IGenericRepository<Book> repository, IParser<BookVO, Book> converter, IParser<Book, BookVO> desconverter)
         {
             _repository = repository;
+            _converter = converter;
+            _desconverter = desconverter;
         }
-        public Book Create(Book objeto)
+        public BookVO Create(BookVO objeto)
         {
-            return _repository.Create(objeto);
+            var book = _converter.Parse(objeto);            
+            return _desconverter.Parse(_repository.Create(book));
         }
 
         public void Delete(long id)
@@ -22,20 +30,21 @@ namespace RestApp.Business.Implementations
             _repository.Delete(id);
         }
 
-        public List<Book> FindAll()
-        {
-            var result = _repository.FindAll();
+        public List<BookVO> FindAll()
+        {            
+            var result = _desconverter.ParseList(_repository.FindAll());
             return result;
         }
 
-        public Book FindById(long id)
+        public BookVO FindById(long id)
         {
-            return _repository.FindById(id);
+            return _desconverter.Parse(_repository.FindById(id));
         }
 
-        public Book Update(Book objeto)
+        public BookVO Update(BookVO objeto)
         {
-            return _repository.Update(objeto);
+            var book = _converter.Parse(objeto);
+            return _desconverter.Parse(_repository.Update(book));
         }
     }
 }
